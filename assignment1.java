@@ -27,6 +27,7 @@ public class Assignment1 {
         int numProcesses = scanner.nextInt();
         List<Process> processes = new ArrayList<>();
 
+        // Input for each process
         for (int i = 0; i < numProcesses; i++) {
             System.out.print("Enter Arrival time for Process " + (i + 1) + ": ");
             int arrivalTime = scanner.nextInt();
@@ -35,8 +36,29 @@ public class Assignment1 {
             processes.add(new Process(i + 1, arrivalTime, burstTime));
         }
 
+        // Displaying initial process details
+        displayProcessDetails(processes);
+        
+        // Simulate Round Robin Scheduling
         simulateRoundRobin(processes);
         scanner.close();
+    }
+
+    private static void displayProcessDetails(List<Process> processes) {
+        System.out.print(" \n Number of processes=" + processes.size() + " (");
+        for (int i = 0; i < processes.size(); i++) {
+            System.out.print("P" + processes.get(i).id);
+            if (i < processes.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println(")");
+
+        System.out.println("Arrival times and burst times as follows:");
+        for (Process p : processes) {
+            System.out.printf("P%d: Arrival time = %d, Burst time = %d\n", p.id, p.arrivalTime, p.burstTime);
+        }
+        System.out.println("Scheduling Algorithm: Round Robin (Time Quantum = " + TIME_QUANTUM + ")");
     }
 
     private static void simulateRoundRobin(List<Process> processes) {
