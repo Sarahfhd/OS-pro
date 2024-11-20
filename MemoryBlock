@@ -1,0 +1,22 @@
+package memorysimulation;
+
+public class MemoryBlock {
+    int start;
+    int end;
+    boolean isFree;
+
+    public MemoryBlock(int start, int end) {
+        this.start = start;
+        this.end = end;
+        this.isFree = true;
+    }
+
+    public int getSize() {
+        return end - start + 1;
+    }
+
+    @Override
+    public String toString() {
+        return start + "-" + end + " " + (isFree ? "free" : "allocated");
+    }
+}
