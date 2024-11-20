@@ -1,0 +1,54 @@
+package memorysimulation;
+
+import java.util.Scanner;
+
+public class MemoryFragmentationSimulation {
+    public static void main(String[] args) {
+        MemoryManager memoryManager = new MemoryManager();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Total Memory size in bytes: ");
+        int totalSize = scanner.nextInt();
+
+        System.out.print("Enter total number of blocks: ");
+        int numBlocks = scanner.nextInt();
+
+        System.out.print("Enter allocation strategy (1 for first-fit, 2 for best-fit, 3 for worst-fit): ");
+        int strategy = scanner.nextInt();
+
+        memoryManager.initializeMemory(totalSize, numBlocks);
+        System.out.println("\nMemory blocks are created...");
+        memoryManager.printMemoryStatus();
+
+        while (true) {
+            System.out.println("\nEnter:");
+            System.out.println("====================================");
+            System.out.println("1) Allocate");
+            System.out.println("2) Print Memory, External Fragmentation");
+            System.out.println("3) Exit");
+            System.out.println("====================================");
+            System.out.print("Choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Allocation Request in bytes: ");
+                    int requestSize = scanner.nextInt();
+                    memoryManager.allocateMemory(requestSize, strategy);
+                    break;
+
+                case 2:
+                    memoryManager.printMemoryStatus();
+                    break;
+
+                case 3:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+}
